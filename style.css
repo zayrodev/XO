@@ -1,0 +1,385 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Orbitron', sans-serif;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    /* البداية سوداء بالكامل */
+    background-color: #000; 
+    color: #fff;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.6s ease, box-shadow 0.6s ease;
+}
+
+/* الخلفية الزرقاء النيونية (تُفعل بالجافاسكربت) */
+body.neon-bg {
+    background: radial-gradient(circle at center, #010613 40%, #00122e 100%);
+    box-shadow: inset 0 0 100px rgba(0, 229, 255, 0.15);
+}
+
+/* Splash Screen */
+#splash-screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    transition: opacity 0.6s ease-out;
+    cursor: pointer;
+}
+
+/* Neon Logo */
+#logo {
+    color: #fff;
+    font-size: clamp(3rem, 10vw, 5rem); 
+    font-weight: 900;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    text-shadow: 
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 20px crimson,
+        0 0 40px crimson,
+        0 0 80px crimson,
+        0 0 100px crimson;
+    animation: pulsate 1.5s infinite alternate;
+}
+
+/* Utilities */
+.hidden {
+    display: none !important;
+    pointer-events: none;
+}
+
+/* Menu Layout */
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Neon Blue Buttons */
+.neon-btn {
+    background: transparent;
+    color: #00e5ff;
+    border: 2px solid #00e5ff;
+    padding: 20px;
+    width: 85%; 
+    max-width: 350px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    text-transform: uppercase;
+    box-shadow: 0 0 10px #00e5ff, inset 0 0 10px #00e5ff;
+    text-shadow: 0 0 5px #00e5ff;
+    transition: 0.3s;
+    outline: none;
+    text-align: center;
+}
+
+.neon-btn:hover, .neon-btn:active {
+    background: #00e5ff;
+    color: #000;
+    box-shadow: 0 0 20px #00e5ff, 0 0 40px #00e5ff, inset 0 0 20px #00e5ff;
+    text-shadow: none;
+    transform: scale(1.05);
+}
+
+/* Crimson Neon Back Button */
+.back-btn {
+    color: crimson;
+    border-color: crimson;
+    box-shadow: 0 0 10px crimson, inset 0 0 10px crimson;
+    text-shadow: 0 0 5px crimson;
+    margin-top: 20px; 
+}
+
+.back-btn:hover, .back-btn:active {
+    background: crimson;
+    color: #fff;
+    box-shadow: 0 0 20px crimson, 0 0 40px crimson, inset 0 0 20px crimson;
+    text-shadow: 0 0 5px #fff;
+}
+
+/* --- RPS Screen Styles --- */
+.neon-title-blue {
+    color: #00e5ff;
+    text-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    letter-spacing: 2px;
+}
+
+.neon-title-crimson {
+    color: crimson;
+    text-shadow: 0 0 10px crimson, 0 0 20px crimson;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 1.8rem;
+    min-height: 40px;
+}
+
+.neon-subtitle {
+    color: #fff;
+    text-shadow: 0 0 5px #00e5ff;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.neon-subtitle-crimson {
+    color: #fff;
+    text-shadow: 0 0 5px crimson;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#rps-screen {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.rps-arena {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.choices {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* RPS Player Icons (Masked Cyan) */
+.rps-icon {
+    width: 70px;
+    height: 70px;
+    background-color: #00e5ff; 
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    cursor: pointer;
+    filter: drop-shadow(0 0 10px #00e5ff);
+    transition: transform 0.3s, filter 0.3s;
+}
+
+.rps-icon:hover {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 20px #00e5ff) drop-shadow(0 0 40px #00e5ff);
+}
+
+/* RPS AI Icons (Masked Crimson) */
+.ai-rps-icon {
+    width: 60px;
+    height: 60px;
+    background-color: crimson; 
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    filter: drop-shadow(0 0 10px crimson);
+    animation: popIn 0.4s ease-out;
+}
+
+.ai-box {
+    width: 70px;
+    height: 70px;
+    border: 2px dashed crimson;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    color: crimson;
+    box-shadow: inset 0 0 10px rgba(220, 20, 60, 0.5);
+    border-radius: 12px;
+    transition: all 0.3s;
+}
+
+.vs-text {
+    font-size: 1.5rem;
+    color: #555;
+    font-weight: 900;
+}
+
+/* Animations */
+@keyframes pulsate {
+    0% { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px crimson, 0 0 30px crimson, 0 0 40px crimson; }
+    100% { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px crimson, 0 0 50px crimson, 0 0 80px crimson, 0 0 110px crimson; }
+}
+
+@keyframes popIn {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+/* --- Classic Game Board Styles --- */
+#classic-board {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#game-status {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    height: 30px; /* لتثبيت الارتفاع حتى لا يقفز التصميم */
+}
+
+/* حاوية الشبكة 3x3 */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    width: 90vw;
+    max-width: 350px;
+    height: 90vw;
+    max-height: 350px;
+    margin-bottom: 30px;
+}
+
+/* المربع الواحد */
+.cell {
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid #333;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+    transition: all 0.3s ease;
+}
+
+.cell:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: #555;
+}
+
+/* تصميم حرف O (اللاعب - أزرق نيوني) */
+.cell.o-mark {
+    color: #00e5ff;
+    text-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff;
+    border-color: rgba(0, 229, 255, 0.3);
+    animation: popIn 0.3s ease-out;
+}
+
+/* تصميم حرف X (الذكاء الاصطناعي - قرمزي) */
+.cell.x-mark {
+    color: crimson;
+    text-shadow: 0 0 10px crimson, 0 0 20px crimson;
+    border-color: rgba(220, 20, 60, 0.3);
+    animation: popIn 0.3s ease-out;
+}
+
+.board-controls {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    justify-content: center;
+}
+
+.board-controls .neon-btn {
+    width: 150px;
+    font-size: 1rem;
+    padding: 15px;
+}
+
+/* --- Coin Toss Screen Styles --- */
+#coin-toss-screen {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.coin-container {
+    width: 150px;
+    height: 150px;
+    perspective: 1000px;
+    margin: 20px 0;
+}
+
+.coin {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.coin-face {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5rem;
+    font-weight: 900;
+    border-radius: 50%;
+    border: 4px solid;
+    background-color: #050505;
+}
+
+/* وجه O الأزرق */
+.coin-front {
+    color: #00e5ff;
+    border-color: #00e5ff;
+    text-shadow: 0 0 20px #00e5ff;
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.5), inset 0 0 20px rgba(0, 229, 255, 0.5);
+}
+
+/* وجه X القرمزي */
+.coin-back {
+    color: crimson;
+    border-color: crimson;
+    text-shadow: 0 0 20px crimson;
+    box-shadow: 0 0 20px rgba(220, 20, 60, 0.5), inset 0 0 20px rgba(220, 20, 60, 0.5);
+    transform: rotateY(180deg);
+}
+
+/* --- Pyramid Mode Styles --- */
+.edge-click {
+    -webkit-tap-highlight-color: transparent;
+}
+@media (hover: hover) {
+    .edge-click:hover {
+        stroke: rgba(255, 255, 255, 0.2) !important;
+    }
+}
+
+

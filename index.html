@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Zayrodev - X O</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <h1 id="logo">Zayrodev</h1>
+    </div>
+
+    <!-- Main Menu -->
+    <div id="main-menu" class="hidden">
+        <div class="menu-container">
+            <button id="btn-i-play" class="neon-btn">I PLAY</button>
+            <button id="btn-play-friends" class="neon-btn">PLAY WITH FRIENDS</button>
+        </div>
+    </div>
+
+    <!-- Mode Selection -->
+    <div id="mode-selection" class="hidden">
+        <div class="menu-container">
+            <button id="btn-normal" class="neon-btn">CLASSIC</button>
+            <button id="btn-pyramid" class="neon-btn">PYRAMID</button>
+            <button id="btn-back" class="neon-btn back-btn">BACK</button>
+        </div>
+    </div>
+
+    <!-- Rock Paper Scissors Screen (AI Mode) -->
+    <div id="rps-screen" class="hidden">
+        <h2 class="neon-title-blue">WHO STARTS?</h2>
+        <div class="rps-arena">
+            <div class="player-side">
+                <h3 class="neon-subtitle">YOU</h3>
+                <div class="choices">
+                    <div class="rps-icon" data-choice="h" style="-webkit-mask-image: url('h.png'); mask-image: url('h.png');"></div>
+                    <div class="rps-icon" data-choice="w" style="-webkit-mask-image: url('w.png'); mask-image: url('w.png');"></div>
+                    <div class="rps-icon" data-choice="m" style="-webkit-mask-image: url('m.png'); mask-image: url('m.png');"></div>
+                </div>
+            </div>
+            <div class="vs-text">VS</div>
+            <div class="ai-side">
+                <h3 class="neon-subtitle-crimson">A.I</h3>
+                <div id="ai-choice-box" class="ai-box">?</div>
+            </div>
+        </div>
+        <h2 id="rps-result" class="neon-title-crimson hidden"></h2>
+    </div>
+
+    <!-- Coin Toss Screen (Friends Mode) -->
+    <div id="coin-toss-screen" class="hidden">
+        <h2 class="neon-title-blue">COIN TOSS</h2>
+        <h3 class="neon-subtitle" style="margin-bottom: 30px;">O vs X</h3>
+        
+        <div class="coin-container">
+            <div id="coin" class="coin">
+                <div class="coin-face coin-front">O</div>
+                <div class="coin-face coin-back">X</div>
+            </div>
+        </div>
+        
+        <button id="btn-flip-coin" class="neon-btn" style="margin-top: 30px;">FLIP COIN</button>
+        <h2 id="coin-result" class="neon-title-crimson hidden" style="margin-top: 20px;"></h2>
+    </div>
+
+    <!-- Classic Game Board -->
+    <div id="classic-board" class="hidden">
+        <h2 class="neon-title-blue">CLASSIC</h2>
+        <div id="game-status" class="neon-subtitle">YOUR TURN</div>
+        
+        <div class="grid-container">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+
+        <div class="board-controls">
+            <button id="btn-restart" class="neon-btn">RESTART</button>
+            <button id="btn-board-menu" class="neon-btn back-btn">MENU</button>
+        </div>
+    </div>
+        <!-- Pyramid Game Board -->
+    <div id="pyramid-board" class="hidden" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+        <h2 class="neon-title-blue">PYRAMID</h2>
+        <div id="pyramid-status" class="neon-subtitle" style="font-size: 1.5rem; margin-bottom: 10px; height: 30px;">YOUR TURN</div>
+        
+        <div class="scores" style="display: flex; gap: 30px; margin-bottom: 20px; font-size: 1.5rem; font-weight: 900;">
+            <span id="score-o" style="color: #00e5ff; text-shadow: 0 0 10px #00e5ff;">O: 0</span>
+            <span id="score-x" style="color: crimson; text-shadow: 0 0 10px crimson;">X: 0</span>
+        </div>
+        
+        <!-- مساحة لعب الهرم -->
+        <svg id="pyramid-svg" width="335" height="335" style="margin-bottom: 30px;"></svg>
+
+        <div class="board-controls">
+            <button id="btn-restart-pyramid" class="neon-btn">RESTART</button>
+            <button id="btn-board-menu-pyramid" class="neon-btn back-btn">MENU</button>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
